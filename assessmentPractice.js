@@ -45,7 +45,22 @@ The data you're working with will look like this:
     @returns {Object[]} - A list of people that are employed by the given employer
 */
 
-function filterDataByEmployer(people, employer) {}
+function filterDataByEmployer(people, employer) {
+  if (!people.length) {
+    throw "The `people` array is empty.";
+  }
+  if (employer === undefined) {
+    throw `No employer was provided.`;
+  }
+  return people.filter((el) => el.employer === employer);
+//reduce version
+//   return people.reduce((acc, el) => {
+//     if(el.employer === employer) {
+//         acc = [...acc, el];
+//     }
+//     return acc;
+//   },[])
+}
 
 /* 
     Returns the credit card details of every person in the given array. Each object in the array should look like: 
@@ -132,10 +147,10 @@ function ipIsPresent(people, ipAddress) {}
 function findLargeOctets(people) {}
 
 module.exports = {
-    filterDataByEmployer,
-    getCreditCardDetails,
-    getAllEmployers,
-    getPersonByName,
-    ipIsPresent,
-    findLargeOctets,
-}
+  filterDataByEmployer,
+  getCreditCardDetails,
+  getAllEmployers,
+  getPersonByName,
+  ipIsPresent,
+  findLargeOctets,
+};
