@@ -79,26 +79,26 @@ function getCreditCardDetails(people) {
   if (!people.length) {
     throw "The `people` array is empty.";
   }
-    return people.map((person) => {
-      let name = `${person.first_name} ${person.last_name}`;
-      // const { number, type } = person.credit_card; //other way
-      return {
-        name,
-        ...person.credit_card,
-        //number,
-        //type,
-      };
-    });
+  return people.map((person) => {
+    let name = `${person.first_name} ${person.last_name}`;
+    // const { number, type } = person.credit_card; //other way
+    return {
+      name,
+      ...person.credit_card,
+      //number,
+      //type,
+    };
+  });
   //reduce version
-//   return people.reduce((acc, person) => {
-//     let name = `${person.first_name} ${person.last_name}`;
-//     let val = {
-//       name,
-//       ...person.credit_card,
-//     };
-//     acc = [...acc, val];
-//     return acc;
-//   }, []);
+  //   return people.reduce((acc, person) => {
+  //     let name = `${person.first_name} ${person.last_name}`;
+  //     let val = {
+  //       name,
+  //       ...person.credit_card,
+  //     };
+  //     acc = [...acc, val];
+  //     return acc;
+  //   }, []);
 }
 
 /* 
@@ -114,7 +114,21 @@ function getCreditCardDetails(people) {
     @returns {String[]} - Array of employers, sorted alphabetically, unique values only.
 */
 
-function getAllEmployers(people) {}
+function getAllEmployers(people) {
+  if (!people.length) {
+    throw "The `people` array is empty.";
+  }
+ let employers = {};
+  people.forEach((person) => {
+    employers[person.employer] = `value`;
+  });
+// reduce version
+//   let employers = people.reduce((acc, el) => {
+//     acc[el.employer] = `value`;
+//     return acc;
+//   }, {})
+  return Object.keys(employers).sort();
+}
 
 /* 
     Finds a person by a given first name and last name from a list of people.
