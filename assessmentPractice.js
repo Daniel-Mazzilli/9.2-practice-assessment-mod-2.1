@@ -118,15 +118,15 @@ function getAllEmployers(people) {
   if (!people.length) {
     throw "The `people` array is empty.";
   }
- let employers = {};
+  let employers = {};
   people.forEach((person) => {
     employers[person.employer] = `value`;
   });
-// reduce version
-//   let employers = people.reduce((acc, el) => {
-//     acc[el.employer] = `value`;
-//     return acc;
-//   }, {})
+  // reduce version
+  //   let employers = people.reduce((acc, el) => {
+  //     acc[el.employer] = `value`;
+  //     return acc;
+  //   }, {})
   return Object.keys(employers).sort();
 }
 
@@ -145,7 +145,25 @@ function getAllEmployers(people) {
     @returns {Object} - Person with the given first and last name.
 */
 
-function getPersonByName(people, first, last) {}
+function getPersonByName(people, first, last) {
+  if (!people.length) {
+    throw "The `people` array is empty.";
+  }
+  let result = people.find(
+    (person) => person.first_name === first && person.last_name === last
+  );
+// reduce version
+//   let result = people.reduce((acc, person) => {
+//     if(person.first_name === first && person.last_name === last) {
+//         acc = person;
+//     }
+//     return acc;
+//   }, undefined)
+  if (result === undefined) {
+    throw `Person with given name could not be found.`;
+  }
+  return result;
+}
 
 /* 
     Determines whether any person has a given IP.
