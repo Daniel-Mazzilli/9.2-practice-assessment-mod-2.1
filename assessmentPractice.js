@@ -53,13 +53,13 @@ function filterDataByEmployer(people, employer) {
     throw `No employer was provided.`;
   }
   return people.filter((el) => el.employer === employer);
-//reduce version
-//   return people.reduce((acc, el) => {
-//     if(el.employer === employer) {
-//         acc = [...acc, el];
-//     }
-//     return acc;
-//   },[])
+  //reduce version
+  //   return people.reduce((acc, el) => {
+  //     if(el.employer === employer) {
+  //         acc = [...acc, el];
+  //     }
+  //     return acc;
+  //   },[])
 }
 
 /* 
@@ -75,7 +75,31 @@ function filterDataByEmployer(people, employer) {
     @returns {Object[]} - Array of objects matching the pattern in this problem description.
 */
 
-function getCreditCardDetails(people) {}
+function getCreditCardDetails(people) {
+  if (!people.length) {
+    throw "The `people` array is empty.";
+  }
+    return people.map((person) => {
+      let name = `${person.first_name} ${person.last_name}`;
+      // const { number, type } = person.credit_card; //other way
+      return {
+        name,
+        ...person.credit_card,
+        //number,
+        //type,
+      };
+    });
+  //reduce version
+//   return people.reduce((acc, person) => {
+//     let name = `${person.first_name} ${person.last_name}`;
+//     let val = {
+//       name,
+//       ...person.credit_card,
+//     };
+//     acc = [...acc, val];
+//     return acc;
+//   }, []);
+}
 
 /* 
     Returns a unique array of employers, sorted alphabetically from A-Z.
