@@ -215,7 +215,27 @@ function ipIsPresent(people, ipAddress = undefined) {
     @returns {Object[]} - Array of people matching the conditions in the description.
 */
 
-function findLargeOctets(people) {}
+function findLargeOctets(people) {
+  if (!people.length) {
+    throw "The `people` array is empty.";
+  }
+  return people.filter((person) =>
+    person.ip_address.split(`.`).every((el) => Number(el) >= 100)
+  );
+  // reduce version
+  //   return people.reduce((acc, el) => {
+  //     let val = el.ip_address.split(`.`).reduce((acc2, el2) => {
+  //       if (+el2 < 100) {
+  //         acc2 = false;
+  //       }
+  //       return acc2;
+  //     }, true);
+  //     if (val === true) {
+  //       acc = [...acc, el];
+  //     }
+  //     return acc;
+  //   }, []);
+}
 
 module.exports = {
   filterDataByEmployer,
