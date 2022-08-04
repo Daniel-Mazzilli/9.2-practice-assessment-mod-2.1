@@ -45,7 +45,7 @@ The data you're working with will look like this:
     @returns {Object[]} - A list of people that are employed by the given employer
 */
 
-function filterDataByEmployer(people, employer) {
+function filterDataByEmployer(people, employer = undefined) {
   if (!people.length) {
     throw "The `people` array is empty.";
   }
@@ -152,13 +152,13 @@ function getPersonByName(people, first, last) {
   let result = people.find(
     (person) => person.first_name === first && person.last_name === last
   );
-// reduce version
-//   let result = people.reduce((acc, person) => {
-//     if(person.first_name === first && person.last_name === last) {
-//         acc = person;
-//     }
-//     return acc;
-//   }, undefined)
+  // reduce version
+  //   let result = people.reduce((acc, person) => {
+  //     if(person.first_name === first && person.last_name === last) {
+  //         acc = person;
+  //     }
+  //     return acc;
+  //   }, undefined)
   if (result === undefined) {
     throw `Person with given name could not be found.`;
   }
@@ -179,7 +179,22 @@ function getPersonByName(people, first, last) {
     @returns {Boolean} - Whether we've found the IP address.
 */
 
-function ipIsPresent(people, ipAddress) {}
+function ipIsPresent(people, ipAddress = undefined) {
+  if (!people.length) {
+    throw "The `people` array is empty.";
+  }
+  if (ipAddress === undefined) {
+    throw `No ipAddress is provided.`;
+  }
+  return people.some((person) => person.ip_address === ipAddress);
+  // reduce version
+  //   return people.reduce((acc, person) => {
+  //     if (person.ip_address === ipAddress) {
+  //       acc = true;
+  //     }
+  //     return acc;
+  //   }, false);
+}
 
 /* 
     An IP address is composed of four numbers, each separated by a dot. Each of those numbers will be between 1 and 255, with some additional rules that we won't get into here. We want to find all people that have IP addresses where all of those numbers in their IP address are greater than 100.
